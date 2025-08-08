@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Understanding np.array() in NumPy</title>
+  <link rel="stylesheet" href="../css/numpy.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</head>
+<body oncontextmenu="return false" 
+  onselectstart="return false" 
+  ondragstart="return false"
+  onkeydown="return preventKeys(event)"
+  style="
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none;"
+
+>
+<div class="copyright-icon" onclick="showCopyright()">
+  ©
+</div>
+<!-- Modal -->
+<div id="copyrightModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>About This Article</h2>
+    <p>
+      © 2025 Manushi Katipearachchi.<br>All rights reserved.<br><br>
+      This article is part of my personal journey learning data science. I created it to deepen my understanding and share the knowledge I have gained.<br><br>
+      The content is intended for everyone who wants to learn and grow in this field. Feel free to read, explore, and gain knowledge at your own pace.
+    </p>
+  </div>
+</div>
+
+  <div class="back-button">
+    <a href="index.html">← Back</a>
+  </div>
+
+  <div class="container">
+    <h1>Understanding <code class="method">np.array()</code> in NumPy</h1>
+    <div class="meta">
+     By Manushi Katipearachchi · Aug 2, 2025
+    </div>
+
+    <div class="image-container">
+      <img src="../assets/numpy/6.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
+    </div>
+
+    <h2>List</h2>
+    <blockquote>
+    <p>A list is a collection of items in square brackets.</p>
+    <pre><code>[1, 2, 3]</code></pre>
+    </blockquote>
+
+    <h2>Tuple</h2>
+    
+    <blockquote>
+    <p>A tuple is a collection of items in round brackets.</p>
+    <pre><code>(1, 2, 3)</code></pre>
+    </blockquote>
+    <p>🔸Both hold multiple values in order.  <br>
+    🔸Both can be used to build arrays.</p>
+
+    <h2>Python List vs Tuple Comparison Table</h2><br>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>List</th>
+        <th>Tuple</th>
+        <th>Info</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Mutability</td>
+      <td>Lists can be changed (mutable)</td>
+      <td>Tuples can’t be changed (immutable)</td>
+      <td><button class="info-btn" onclick="openFeatureModal('mutability')">👁️</button></td>
+    </tr>
+    <tr>
+      <td>Syntax</td>
+      <td>Square brackets [ ]</td>
+      <td>Parentheses ( )</td>
+      <td><button class="info-btn" onclick="openFeatureModal('syntax')">👁️</button></td>
+    </tr>
+    <tr>
+      <td>Performance</td>
+      <td>Slower</td>
+      <td>Faster</td>
+      <td><button class="info-btn" onclick="openFeatureModal('performance')">👁️</button></td>
+    </tr>
+    <tr>
+      <td>Methods</td>
+      <td>More built-in methods</td>
+      <td>Fewer methods</td>
+      <td><button class="info-btn" onclick="openFeatureModal('methods')">👁️</button></td>
+    </tr>
+    <tr>
+      <td>Use Cases</td>
+      <td>For dynamic collections</td>
+      <td>For fixed collections</td>
+      <td><button class="info-btn" onclick="openFeatureModal('usecases')">👁️</button></td>
+    </tr>
+    <tr>
+      <td>Memory Usage</td>
+      <td>More memory</td>
+      <td>Less memory</td>
+      <td><button class="info-btn" onclick="openFeatureModal('memory')">👁️</button></td>
+    </tr>
+    <tr>
+      <td>Iteration</td>
+      <td>Slightly slower</td>
+      <td>Faster</td>
+      <td><button class="info-btn" onclick="openFeatureModal('iteration')">👁️</button></td>
+    </tr>
+    <tr>
+      <td>Hashability</td>
+      <td>Not hashable</td>
+      <td>Hashable (if elements are hashable)</td>
+      <td><button class="info-btn" onclick="openFeatureModal('hashability')">👁️</button></td>
+    </tr>
+  </tbody>
+  </table>
+  <!-- Feature Info Modal -->
+<div id="featureModal" class="feature-modal">
+  <div class="feature-modal-content">
+    <span class="feature-close" onclick="closeFeatureModal()">&times;</span>
+    <h3 id="featureModalTitle"></h3>
+    <p id="featureModalText"></p>
+  </div>
+</div>
+    <h2>Why Use a List or Tuple</h2>
+    <div class="highlights">
+      🔹 They group values together<br>
+    🔹 They show shape and structure<br>
+    🔹 NumPy reads the shape from the nesting<br>
+    🔹 Lists are mutable, so you can change their contents<br>
+    🔹 Tuples are immutable, which can help with data integrity<br>
+    🔹 Tuples can be used as dictionary keys if their elements are hashable<br>
+    🔹 Lists have many built-in methods for easy manipulation<br>
+    🔹 Tuples use less memory and can be faster to iterate over
+    </div>
+    <h2>Why Use <code>np.array()</code> to Create Arrays?</h2>
+<p><code>np.array()</code> is used to convert Python lists or tuples into NumPy arrays because these arrays:</p>
+<div class="highlights">
+  🔹Store data efficiently in contiguous memory blocks, which speeds up computations. <br>
+  🔹Allow fast, vectorized mathematical operations without writing loops.<br>
+  🔹Support multi-dimensional data like matrices and tensors naturally.<br>
+  🔹Use less memory compared to Python lists and provide better performance.<br>
+  🔹Enable powerful features like broadcasting and many built-in scientific functions.<br>
+</div><br>
+<p>This makes <code>np.array()</code> essential for scientific computing, data analysis, and machine learning tasks.</p>
+
+    <h2>How <code>np.array()</code> Works</h2>
+    <p><code>np.array()</code> takes <strong>one argument only</strong>.  
+    That argument must be a list, tuple, or a nested version of either.</p>
+
+    <blockquote>
+    <pre><code>✅ np.array([[1, 2], [3, 4]])  # Correct</code></pre><br>
+    <p> 🔸This is a list of lists ( [ [ ] , [ ] ] )<br>
+    🔸NumPy turns it into a 2D array</p>
+
+    <pre><code>❌ np.array([1, 2], [3, 4])  # Error</code></pre><br>
+    <p>🔸This passes two arguments ( [ ] , [ ] ) <br>
+    🔸NumPy expects just one</p>
+    </blockquote>
+
+    
+
+    <h3 class="highlights_2">Examples of Array Types</h3><br>
+    <p><strong>1D array</strong></p>
+    <blockquote>
+    <pre><code>np.array([1, 2, 3])</code></pre>
+    </blockquote>
+    <p><strong>2D array</strong></p>
+    <blockquote>
+    <pre><code>np.array([[1, 2], [3, 4]])</code></pre>
+    </blockquote>
+    <p><strong>3D array</strong></p>
+    <blockquote>
+    <pre><code>np.array([[[1], [2]], [[3], [4]]])</code></pre>
+    </blockquote><br>
+    <p class="message">So, always pass your data in one list or tuple.  
+    That’s how <code>np.array()</code> understands it 🙃</p>
+
+    <p>Thank you for reading ♡</p>
+  </div>
+  <!-- Scroll to Top Button -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+  <script>
+    // Set the real-time published date (4 days ago)
+    const date = new Date();
+    date.setDate(date.getDate() - 4);
+    document.getElementById("date").textContent = date.toDateString();
+  </script>
+<script>
+  const featureInfo = {
+  mutability: `Mutability refers to whether a data structure can be changed after it's created.
+Lists are mutable, you can add, remove, or update their items.
+Tuples are immutable, once created, their contents cannot be modified.`,
+
+  syntax: `The syntax defines how you write the structure.
+Lists use square brackets [ ], like [1, 2, 3].
+Tuples use parentheses ( ), like (1, 2, 3).`,
+
+  performance: `Tuples offer better performance than lists because they are static and immutable,
+which makes them quicker to access and more memory efficient.`,
+
+  methods: `Lists come with many built-in methods such as append(), remove(), and pop().
+Tuples only support count() and index() because they are immutable.`,
+
+  usecases: `Use lists when your data is likely to change over time.
+Use tuples when your data is fixed and should not be altered,
+like constants or configuration settings.`,
+
+  memory: `Tuples consume less memory than lists because they are immutable and have a fixed size.
+Lists, being flexible, require more memory overhead.`,
+
+  iteration: `Iterating over a tuple is slightly faster than over a list,
+due to the immutability and simplicity of tuples in memory.`,
+
+  hashability: `Lists are not hashable, so they can’t be used as dictionary keys.
+Tuples are hashable if all their elements are also hashable,
+making them suitable for use as keys.`
+};
+
+
+  function openFeatureModal(key) {
+    const titleMap = {
+      mutability: "Mutability",
+      syntax: "Syntax",
+      performance: "Performance",
+      methods: "Methods",
+      usecases: "Use Cases",
+      memory: "Memory Usage",
+      iteration: "Iteration",
+      hashability: "Hashability"
+    };
+
+    document.getElementById("featureModalTitle").textContent = titleMap[key] || key;
+    document.getElementById("featureModalText").textContent = featureInfo[key];
+    const modal = document.getElementById("featureModal");
+    modal.classList.add("show");
+  }
+
+  function closeFeatureModal() {
+    document.getElementById("featureModal").classList.remove("show");
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("featureModal");
+    if (event.target === modal) {
+      closeFeatureModal();
+    }
+  };
+</script>
+<script>
+    function preventKeys(e) {
+      const blocked = ['c', 'u', 's'];
+      if (e.ctrlKey && blocked.includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        return false;
+      }
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+    }
+  </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.zoomable').forEach(img => {
+      img.addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'zoom-overlay';
+
+        const zoomImg = document.createElement('img');
+        zoomImg.src = img.src;
+        zoomImg.alt = img.alt;
+
+        overlay.appendChild(zoomImg);
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', () => {
+          overlay.remove();
+        });
+      });
+    });
+  });
+</script>
+<script>
+  const modal = document.getElementById('copyrightModal');
+
+  function showCopyright() {
+    modal.classList.add('show');
+  }
+
+  function closeModal() {
+    modal.classList.remove('show');
+  }
+
+  // Optional: click outside to close
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+</script>
+  <script>
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show/hide button on scroll
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+
+  // Scroll to top function
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+
+</html>

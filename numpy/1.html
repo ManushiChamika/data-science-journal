@@ -6,7 +6,7 @@
   <title>Just NumPy :) - Article 1</title>
   <link rel="stylesheet" href="../css/numpy.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
 </head>
@@ -103,8 +103,8 @@
       <li>Object Value → 11111100 00000000 11001100 01011111 ( 4 bytes )</li>
     </ul>
     </blockquote>
-    <p>🔸 This adds up to at least 16 bytes, just for metadata.</p>
-    <p>🔸 With Python’s overhead, storing 5 in a list can use 28+ bytes.</p>
+    <p>🔸 This adds up to at least 16 bytes, just for metadata ( Extra data ).</p>
+    <p>🔸 With Python’s overhead ( Extra memory used by system ) , storing 5 in a list can use 28+ bytes.</p>
     <p>🔸 In contrast, NumPy’s Int8 uses only 1 byte.</p>
 
     <h3>Reason 2: No type checking when iterating through objects</h3><br>
@@ -116,6 +116,7 @@
       <li>Float</li>
       <li>List</li>
       <li>Dictionary</li>
+      <li>etc.</li>
     </ul>
     </blockquote>
     <p>🔸 This adds flexibility but may slow performance.</p>
