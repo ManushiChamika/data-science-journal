@@ -1,10 +1,12 @@
 ﻿# data-science-journal
 
-Welcome to **Data Science Journal**, a personal collection of articles and tutorials written by **Manushi Katipearachchi**.
+Welcome to **Data Science Journal**, a personal space where I document what I learn, explore, and build in the world of data science.
 
-This journal is where I share what I learn and practice in the field of data science — from foundational Python and essential libraries like NumPy and Pandas, to machine learning techniques and real-world analysis projects.
+This journal serves two purposes:  
+🧠 to track and deepen my own learning  
+📖 to help others understand and grow through shared knowledge
 
-Each post is written with clarity in mind, aimed at helping others understand, apply, and grow in their own data science journey.
+Here, you’ll find clear explanations, practical examples, and thoughtful reflections on a range of topics — from Python fundamentals and data libraries, to real-world machine learning and analysis.
 
 ---
 
@@ -35,3 +37,4 @@ I write to learn better, and to help others do the same.
 
 Content in this repository is shared for learning and personal use.  
 All writings © Manushi Katipearachchi.
+
