@@ -5,12 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Just NumPy :) - Article 1</title>
   <link rel="stylesheet" href="../css/numpy.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 
 </head>
-<body>
+<body oncontextmenu="return false" 
+  onselectstart="return false" 
+  ondragstart="return false"
+  onkeydown="return preventKeys(event)"
+  style="
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none;"
+>
+
   <div class="back-button">
-    <a href="javascript:history.back()">← Back</a>
+    <a href="javascript:history.back()">< Back</a>
   </div>
+<!-- Copyright Icon (Trigger) -->
+<div class="copyright-icon" onclick="showCopyright()">
+  ©
+</div>
   <div class="container">
     <h1>Just NumPy :)</h1>
     <div class="meta"><div class="meta">
@@ -18,7 +35,21 @@
     </div>
 </div>
 
-    <h2>Part 1</h2>
+<!-- Modal -->
+<div id="copyrightModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>About This Article</h2>
+    <p>
+      © 2025 Manushi Katipearachchi.<br>All rights reserved.<br><br>
+      This article is part of my personal journey learning data science. I created it to deepen my understanding and share the knowledge I have gained.<br><br>
+      The content is intended for everyone who wants to learn and grow in this field. Feel free to read, explore, and gain knowledge at your own pace.
+    </p>
+  </div>
+</div>
+
+
+    <h2 class="part">Part 1</h2>
 
     <h2>Why Start with NumPy?</h2>
     <p>NumPy is the backbone of data work in Python. It powers tons of tools even if you don’t see it directly. If you work with numbers, arrays, or data tables, you’re already depending on NumPy.</p>
@@ -42,41 +73,41 @@
       <img src="../assets/numpy/3.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
     </div>
 
-    <h3>Reason 1: Faster to read less bytes of memory</h3>
+    <h3>Reason 1: Faster to read less bytes of memory</h3><br>
     <p>To explain this, let’s focus on the number 5 in the 2D array below.</p>
 
     <div class="image-container">
       <img src="../assets/numpy/4.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
     </div>
 
-    <h4>In NumPy</h4>
+    <h4>In NumPy</h4><br>
     <p>The number 5 can be stored in different fixed-size integer types:</p>
     <blockquote>
     <ul>
-      <li>Int8 → 00000101 (1 byte)</li>
-      <li>Int16 → 00000000 00000101 (2 bytes)</li>
-      <li>Int32 → 00000000 00000000 00000000 00000101 (4 bytes)</li>
-      <li>Int64 → 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101 (8 bytes)</li><br>
+      <li>Int8 → 00000101 ( 1 byte )</li>
+      <li>Int16 → 00000000 00000101 ( 2 bytes )</li>
+      <li>Int32 → 00000000 00000000 00000000 00000101 ( 4 bytes )</li>
+      <li>Int64 → 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101 ( 8 bytes )</li><br>
     </ul>
   </blockquote>
     <p>🔸 Each type stores only the value. Memory use is small and fixed.</p>
     <p>🔸 You can choose any fixed-size integer type to store 5 in NumPy.</p>
 
-    <h4>But in a Python list</h4>
+    <h4>But in a Python list</h4><br>
     <p>The number 5 is stored along with extra data:</p>
     <blockquote>
     <ul>
-      <li>Size → 4 bytes</li>
-      <li>Reference Count → 4 bytes</li>
-      <li>Object Type → 4 bytes</li>
-      <li>Object Value → 4 bytes</li>
+      <li>Size → 00000001 00111101 11111110 10111100 ( 4 bytes )</li>
+      <li>Reference Count → 00011010 11011101 10100100 11011000 ( 4 bytes )</li>
+      <li>Object Type → 11001010 10111110 01100001 01000100 ( 4 bytes )</li>
+      <li>Object Value → 11111100 00000000 11001100 01011111 ( 4 bytes )</li>
     </ul>
     </blockquote>
     <p>🔸 This adds up to at least 16 bytes, just for metadata.</p>
     <p>🔸 With Python’s overhead, storing 5 in a list can use 28+ bytes.</p>
     <p>🔸 In contrast, NumPy’s Int8 uses only 1 byte.</p>
 
-    <h3>Reason 2: No type checking when iterating through objects</h3>
+    <h3>Reason 2: No type checking when iterating through objects</h3><br>
     <p>🔸 When looping in Python, types aren’t checked, so items can be any type:</p>
     <blockquote>
     <ul>
@@ -89,7 +120,7 @@
     </blockquote>
     <p>🔸 This adds flexibility but may slow performance.</p>
 
-    <h3>Reason 3: Contiguous memory</h3>
+    <h3>Reason 3: Contiguous memory</h3><br>
     <p>Python lists store references scattered in memory (not contiguous).</p>
     <p>NumPy arrays store data in one continuous block of memory (contiguous).</p>
 
@@ -97,13 +128,13 @@
       <img src="../assets/numpy/5.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
     </div>
 
-    <h4 class=" benefits">Benefits:</h4>
+    <h4 class=" benefits">Benefits:</h4><br>
     <ul>
       <li>Faster processing using SIMD vector instructions.</li>
     </ul>
 
     <blockquote>
-      <strong>SIMD Vectorization</strong><br>
+      <strong style="display: inline-block; padding-bottom: 8px; padding-left: 30px; text-decoration: underline;">SIMD Vectorization</strong><br>
       🔸 Stands for Single Instruction, Multiple Data<br/>
       🔸 Performs the same operation on many elements at once<br/>
       🔸 NumPy uses this for faster calculations<br/>
@@ -114,10 +145,13 @@
       <li>Better use of CPU cache, speeding up operations.</li>
     </ul>
     <br>
-    <p>This might seem tricky at first, but once you get the basics, everything starts to click. Stick around for more and let’s keep learning together.</p>
+    <p class="message">This might seem tricky at first, but once you get the basics, everything starts to click. Stick around for more and let’s keep learning together.</p>
 
     <p><strong>Thank you for reading ♡</strong></p>
   </div>
+  <!-- Scroll to Top Button -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+
 </body>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -140,5 +174,53 @@
     });
   });
 </script>
+<!-- JavaScript -->
+<script>
+  const modal = document.getElementById('copyrightModal');
 
+  function showCopyright() {
+    modal.classList.add('show');
+  }
+
+  function closeModal() {
+    modal.classList.remove('show');
+  }
+
+  // Optional: click outside to close
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+</script>
+<script>
+    function preventKeys(e) {
+      const blocked = ['c', 'u', 's'];
+      if (e.ctrlKey && blocked.includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        return false;
+      }
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+    }
+  </script>
+  <script>
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show/hide button on scroll
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+
+  // Scroll to top function
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 </html>

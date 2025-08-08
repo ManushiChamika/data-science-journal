@@ -8,7 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
 </head>
-<body>
+<body oncontextmenu="return false" 
+    onselectstart="return false" 
+    ondragstart="return false"
+    onkeydown="return preventKeys(event)"
+    style="
+        user-select: none; 
+        -webkit-user-select: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none;">    
     <!-- Header -->
     <header>
         <div class="header-container">
@@ -27,17 +35,6 @@
             </nav>
         </div>
     </header>
-
-    <!-- Hero Section -->
-<!-- <section class="hero">
-    <div class="hero-content">
-        <h1>Data Science, Demystified</h1>
-        <p>Simple practical blogs on Python and data science from real projects to clear tutorials.</p>
-        <a href="#topics" class="cta-button">Explore the Blog <i class="fas fa-arrow-right"></i></a>
-    </div>
-</section> -->
-
-
 
     <!-- Topics Section -->
    <section id="topics" class="topics">
@@ -100,53 +97,10 @@
         </a>
 
     </div>
+
 </section>
-
-
-    <!-- Footer -->
-    <!-- <footer>
-        <div class="footer-container">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <i class="fas fa-chart-line"></i>
-                    Data<span>Blog</span>
-                </div>
-                <p>Grow in data science with hands-on learning.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-links">
-                <h3 class="footer-heading">Learning Paths</h3>
-                <ul>
-                    <li><a href="#">Python Fundamentals</a></li>
-                    <li><a href="#">Data Analysis</a></li>
-                    <li><a href="#">Data Visualization</a></li>
-                    <li><a href="#">Machine Learning</a></li>
-                    <li><a href="#">Deep Learning</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-links">
-                <h3 class="footer-heading">Resources</h3>
-                <ul>
-                    <li><a href="#">Cheat Sheets</a></li>
-                    <li><a href="#">Datasets</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Interview Prep</a></li>
-                    <li><a href="#">Career Guide</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2023 DataSphere. All rights reserved.</p>
-        </div>
-    </footer> -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+</body>
 
     <script>
         // Simple smooth scrolling for navigation links
@@ -179,5 +133,34 @@
             return re.test(String(email).toLowerCase());
         }
     </script>
-</body>
+     <script>
+    function preventKeys(e) {
+      const blocked = ['c', 'u', 's'];
+      if (e.ctrlKey && blocked.includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        return false;
+      }
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+    }
+  </script>
+  <script>
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show/hide button on scroll
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+
+  // Scroll to top function
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 </html>

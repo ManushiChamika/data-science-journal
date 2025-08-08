@@ -10,7 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/numpy.css">
 </head>
-<body>
+<body oncontextmenu="return false" 
+  onselectstart="return false" 
+  ondragstart="return false"
+  onkeydown="return preventKeys(event)"
+  style="
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none;">
     <!-- Data Visualization Elements -->
     <div class="viz-circle viz-element"></div>
     <div class="viz-line viz-element" style="top: 40%; left: 15%;"></div>
@@ -93,15 +101,36 @@
 </div>
 
     </main>
-
-    <!-- <footer>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <i class="fas fa-calculator"></i>
-                <span>NumPy</span> Documentation
-            </div>
-            <p class="copyright">© 2023 NumPy Articles. All rights reserved.</p>
-        </div>
-    </footer> -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
 </body>
+<script>
+    function preventKeys(e) {
+      const blocked = ['c', 'u', 's'];
+      if (e.ctrlKey && blocked.includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        return false;
+      }
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+    }
+  </script>
+  <script>
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show/hide button on scroll
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+
+  // Scroll to top function
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 </html>
