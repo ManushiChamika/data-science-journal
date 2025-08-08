@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Just NumPy :) - Article 1</title>
+  <link rel="stylesheet" href="../css/numpy.css">
+
+</head>
+<body>
+  <div class="back-button">
+    <a href="javascript:history.back()">← Back</a>
+  </div>
+  <div class="container">
+    <h1>Just NumPy :)</h1>
+    <div class="meta"><div class="meta">
+        By Manushi Katipearachchi · Aug 2, 2025
+    </div>
+</div>
+
+    <h2>Part 1</h2>
+
+    <h2>Why Start with NumPy?</h2>
+    <p>NumPy is the backbone of data work in Python. It powers tons of tools even if you don’t see it directly. If you work with numbers, arrays, or data tables, you’re already depending on NumPy.</p>
+    
+    <blockquote>That’s what NumPy is!</blockquote>
+
+    <div class="image-container">
+      <img src="../assets/numpy/1.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
+    </div>
+
+
+    <p>Data in NumPy arrays can be 1D (a list), 2D (a table), or 3D (a stack of tables).</p>
+
+    <div class="image-container">
+      <img src="../assets/numpy/2.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
+    </div>
+
+    <h2>Why Is NumPy Faster Compared to Normal Python Lists?</h2>
+
+    <div class="image-container">
+      <img src="../assets/numpy/3.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
+    </div>
+
+    <h3>Reason 1: Faster to read less bytes of memory</h3>
+    <p>To explain this, let’s focus on the number 5 in the 2D array below.</p>
+
+    <div class="image-container">
+      <img src="../assets/numpy/4.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
+    </div>
+
+    <h4>In NumPy</h4>
+    <p>The number 5 can be stored in different fixed-size integer types:</p>
+    <blockquote>
+    <ul>
+      <li>Int8 → 00000101 (1 byte)</li>
+      <li>Int16 → 00000000 00000101 (2 bytes)</li>
+      <li>Int32 → 00000000 00000000 00000000 00000101 (4 bytes)</li>
+      <li>Int64 → 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101 (8 bytes)</li><br>
+    </ul>
+  </blockquote>
+    <p>🔸 Each type stores only the value. Memory use is small and fixed.</p>
+    <p>🔸 You can choose any fixed-size integer type to store 5 in NumPy.</p>
+
+    <h4>But in a Python list</h4>
+    <p>The number 5 is stored along with extra data:</p>
+    <blockquote>
+    <ul>
+      <li>Size → 4 bytes</li>
+      <li>Reference Count → 4 bytes</li>
+      <li>Object Type → 4 bytes</li>
+      <li>Object Value → 4 bytes</li>
+    </ul>
+    </blockquote>
+    <p>🔸 This adds up to at least 16 bytes, just for metadata.</p>
+    <p>🔸 With Python’s overhead, storing 5 in a list can use 28+ bytes.</p>
+    <p>🔸 In contrast, NumPy’s Int8 uses only 1 byte.</p>
+
+    <h3>Reason 2: No type checking when iterating through objects</h3>
+    <p>🔸 When looping in Python, types aren’t checked, so items can be any type:</p>
+    <blockquote>
+    <ul>
+      <li>Integer</li>
+      <li>String</li>
+      <li>Float</li>
+      <li>List</li>
+      <li>Dictionary</li>
+    </ul>
+    </blockquote>
+    <p>🔸 This adds flexibility but may slow performance.</p>
+
+    <h3>Reason 3: Contiguous memory</h3>
+    <p>Python lists store references scattered in memory (not contiguous).</p>
+    <p>NumPy arrays store data in one continuous block of memory (contiguous).</p>
+
+    <div class="image-container">
+      <img src="../assets/numpy/5.png" alt="Graph comparing NumPy and Python lists" class="zoomable"/>
+    </div>
+
+    <h4 class=" benefits">Benefits:</h4>
+    <ul>
+      <li>Faster processing using SIMD vector instructions.</li>
+    </ul>
+
+    <blockquote>
+      <strong>SIMD Vectorization</strong><br>
+      🔸 Stands for Single Instruction, Multiple Data<br/>
+      🔸 Performs the same operation on many elements at once<br/>
+      🔸 NumPy uses this for faster calculations<br/>
+      🔸 Much faster than looping through Python lists
+    </blockquote>
+
+    <ul>
+      <li>Better use of CPU cache, speeding up operations.</li>
+    </ul>
+    <br>
+    <p>This might seem tricky at first, but once you get the basics, everything starts to click. Stick around for more and let’s keep learning together.</p>
+
+    <p><strong>Thank you for reading ♡</strong></p>
+  </div>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.zoomable').forEach(img => {
+      img.addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'zoom-overlay';
+
+        const zoomImg = document.createElement('img');
+        zoomImg.src = img.src;
+        zoomImg.alt = img.alt;
+
+        overlay.appendChild(zoomImg);
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', () => {
+          overlay.remove();
+        });
+      });
+    });
+  });
+</script>
+
+</html>
