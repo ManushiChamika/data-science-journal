@@ -65,7 +65,7 @@
     <p>🔸Both hold multiple values in order.  <br>
     🔸Both can be used to build arrays.</p>
 
-    <h2>Python List vs Tuple Comparison Table</h2><br>
+    <h2> List vs Tuple</h2><br>
   <table>
     <thead>
       <tr>
@@ -135,29 +135,31 @@
   </div>
 </div>
     <h2>Why Use a List or Tuple</h2>
-    <div class="highlights">
-      🔹 They group values together<br>
-    🔹 They show shape and structure<br>
-    🔹 NumPy reads the shape from the nesting<br>
-    🔹 Lists are mutable, so you can change their contents<br>
-    🔹 Tuples are immutable, which can help with data integrity<br>
-    🔹 Tuples can be used as dictionary keys if their elements are hashable<br>
-    🔹 Lists have many built-in methods for easy manipulation<br>
-    🔹 Tuples use less memory and can be faster to iterate over
-    </div>
-    <h2>Why Use <code>np.array()</code> to Create Arrays?</h2>
-<p><code>np.array()</code> is used to convert Python lists or tuples into NumPy arrays because these arrays:</p>
 <div class="highlights">
-  🔹Store data efficiently in contiguous memory blocks, which speeds up computations. <br>
-  🔹Allow fast, vectorized mathematical operations without writing loops.<br>
-  🔹Support multi-dimensional data like matrices and tensors naturally.<br>
-  🔹Use less memory compared to Python lists and provide better performance.<br>
-  🔹Enable powerful features like broadcasting and many built-in scientific functions.<br>
+  🔹 Groups values together<br>
+  🔹 Shows shape and structure<br>
+  🔹 NumPy understands shape from how values are nested<br>
+  🔹 Lists can change (mutable)<br>
+  🔹 Tuples cannot change (immutable)<br>
+  🔹 Tuples can be used as dictionary keys<br>
+  🔹 Lists have many built-in tools<br>
+  🔹 Tuples use less memory and are faster
+</div>
+
+<h2>Why Use <code>np.array()</code> to Create Arrays?</h2>
+<p><code>np.array()</code> turns lists or tuples into NumPy arrays because they:</p>
+<div class="highlights">
+  🔹 Store data more efficiently<br>
+  🔹 Do math fast without loops<br>
+  🔹 Handle 1D, 2D, and 3D data easily<br>
+  🔹 Use less memory than lists<br>
+  🔹 Support powerful math features like broadcasting
 </div><br>
+
 <p>This makes <code>np.array()</code> essential for scientific computing, data analysis, and machine learning tasks.</p>
 
     <h2>How <code>np.array()</code> Works</h2>
-    <p><code>np.array()</code> takes <strong>one argument only</strong>.  
+    <p><code>np.array()</code> takes <strong>one argument only</strong>.<br>  
     That argument must be a list, tuple, or a nested version of either.</p>
 
     <blockquote>
@@ -171,8 +173,8 @@
     </blockquote>
 
     
-
-    <h3 class="highlights_2">Examples of Array Types</h3><br>
+<div class="highlights_2">
+    <h3 >Examples of Array Types:</h3><br>
     <p><strong>1D array</strong></p>
     <blockquote>
     <pre><code>np.array([1, 2, 3])</code></pre>
@@ -185,6 +187,7 @@
     <blockquote>
     <pre><code>np.array([[[1], [2]], [[3], [4]]])</code></pre>
     </blockquote><br>
+  </div> <br><br>
     <p class="message">So, always pass your data in one list or tuple.  
     That’s how <code>np.array()</code> understands it 🙃</p>
 
@@ -224,9 +227,11 @@ Lists, being flexible, require more memory overhead.`,
   iteration: `Iterating over a tuple is slightly faster than over a list,
 due to the immutability and simplicity of tuples in memory.`,
 
-  hashability: `Lists are not hashable, so they can’t be used as dictionary keys.
+hashability: `Lists are not hashable (i.e., they don’t have a fixed value and can't be used as dictionary keys or in sets).
 Tuples are hashable if all their elements are also hashable,
 making them suitable for use as keys.`
+
+
 };
 
 
